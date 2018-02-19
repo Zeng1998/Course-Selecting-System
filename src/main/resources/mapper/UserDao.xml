@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zxc.dao.UserDao">
+
+    <select id="selectStuById" resultType="Student" parameterType="int">
+        SELECT * FROM Student WHERE stuId=#{id}
+    </select>
+
+    <select id="selectTeaById" resultType="Teacher" parameterType="int">
+        SELECT * FROM Teacher WHERE teaId=#{id}
+    </select>
+
+    <update id="updateStuPass" parameterType="Student">
+        UPDATE Student SET
+        stuPass=#{stuPass}
+        WHERE stuId=#{stuId}
+    </update>
+
+    <update id="updateTeaPass" parameterType="Teacher">
+        UPDATE Teacher SET
+        teaPass=#{teaPass}
+        WHERE teaId=#{teaId}
+    </update>
+    <select id="queryAllTeacher" resultType="Teacher">
+        SELECT * FROM Teacher
+    </select>
+
+</mapper>

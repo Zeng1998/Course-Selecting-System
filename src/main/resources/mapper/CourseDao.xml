@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zxc.dao.CourseDao">
+    <select id="queryCourseById" parameterType="int" resultType="Course">
+        SELECT * FROM Course WHERE teaId=#{id}
+    </select>
+    <select id="queryAllIns" resultType="Institution">
+        SELECT * FROM Institution
+    </select>
+    <select id="queryInsIdByCourseId" parameterType="int" resultType="int">
+        SELECT insId FROM Course_limit WHERE classId=#{id}
+    </select>
+    <select id="selectNameByInsId" parameterType="int" resultType="java.lang.String">
+        SELECT insName FROM Institution WHERE insId=#{id}
+    </select>
+    <insert id="insertCourse" parameterType="Course" useGeneratedKeys="true" keyProperty="classId" keyColumn="classId">
+        INSERT INTO Course(className,classNum,teaId,classChooseNum)
+        VALUES (#{className},#{classNum},#{teaId},#{classChooseNum})
+    </insert>
+    <update id="updateCourse" parameterType="Course">
+        UPDATE Course SET
+        className=#{className},
+        classNum=#{classNum},
+        teaId=#{teaId},
+        classChooseNum=#{classChooseNum}
+        WHERE classId=#{classId}
+    </update>
+    <insert id="insertInsLimit" parameterType="Course_limit">
+        INSERT INTO Course_limit (classId,insId)
+        VALUES (#{classId},#{insId})
+    </insert>
+    <insert id="updateInsLimit" parameterType="Course_limit">
+        UPDATE Course_limit SET
+        insId=#{insId}
+        WHERE classId=#{classId}
+    </insert>
+    <select id="queryCourseInfoById" parameterType="int" resultType="Course">
+        SELECT * FROM Course WHERE classId=#{id}
+    </select>
+    <select id="selectCourseLimit" parameterType="int" resultType="int">
+        SELECT insId FROM Course_limit WHERE classId=#{classId}
+    </select>
+    <select id="selectMaxCourseId" resultType="int">
+        SELECT MAX(classId) FROM Course
+    </select>
+    <delete id="deleteInsLimit" parameterType="int">
+        DELETE FROM Course_limit WHERE classId=#{id}
+    </delete>
+    <delete id="deleteCourseById" parameterType="int">
+        DELETE FROM Course WHERE classId=#{id}
+    </delete>
+    <delete id="deleteStuByClassId" parameterType="int">
+        DELETE FROM Course_choose WHERE classId=#{id}
+    </delete>
+    <delete id="deleteLimitByClassId" parameterType="int">
+        DELETE FROM Course_limit WHERE classId=#{id}
+    </delete>
+    <select id="queryStuIdByCourseId" parameterType="int" resultType="Course_choose">
+        SELECT * FROM Course_choose WHERE classId=#{id}
+    </select>
+    <update id="updateScore" parameterType="Course_choose">
+        UPDATE Course_choose SET
+        score=#{score}
+        WHERE stuId=#{stuId} AND classId=#{classId}
+    </update>
+    <select id="queryAllCourse" resultType="Course">
+        SELECT * FROM Course;
+    </select>
+    <select id="selectInsIdByClassId" parameterType="int" resultType="int">
+        SELECT insId FROM Course_limit where classId=#{classId}
+    </select>
+    <select id="selectTeaNameByTeaId" parameterType="int" resultType="String">
+        SELECT teaName FROM Teacher where teaId=#{id}
+    </select>
+    <select id="selectCourseByClassId" parameterType="int" resultType="Course">
+        SELECT * FROM Course WHERE classId=#{id}
+    </select>
+    <select id="addChooseNum" parameterType="int">
+        UPDATE Course SET classChooseNum = classChooseNum+1 WHERE classId=#{id}
+    </select>
+    <insert id="addCourseChoose" parameterType="Course_choose">
+        INSERT INTO Course_choose (stuId,classId,score)
+        VALUES (#{stuId},#{classId},#{score})
+    </insert>
+    <select id="queryCourseIdByStuId" parameterType="int" resultType="int">
+        SELECT classId FROM Course_choose WHERE stuId=#{id}
+    </select>
+    <select id="downChooseNum" parameterType="int">
+        UPDATE Course SET classChooseNum = classChooseNum-1 WHERE classId=#{id}
+    </select>
+    <delete id="deleteCourseChoose" parameterType="Course_choose">
+        DELETE FROM Course_choose WHERE stuId=#{stuId} AND classId=#{classId}
+    </delete>
+    <select id="selectScore" parameterType="Course_choose" resultType="int">
+        SELECT score FROM Course_choose WHERE classId=#{classId} AND stuId=#{stuId}
+    </select>
+</mapper>
