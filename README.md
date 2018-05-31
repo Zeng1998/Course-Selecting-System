@@ -61,7 +61,3 @@
 ### 删除学生
 ![删除学生](https://github.com/Zeng1998/Course-Selecting-System/raw/master/Screenshots/16.png)
 
-—————————断断续续从除夕夜写到了正月初四，最终完成于2018.2.19
-经过这个大一寒假的学习，现在几百行垃圾代码根本不算事，张手就来。。。 :expressionless: :expressionless: 
-
-
