@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.zxc.dao.CourseDao">
+<mapper namespace="com.yasin.dao.CourseDao">
     <select id="queryCourseById" parameterType="int" resultType="Course">
         SELECT * FROM Course WHERE teaId=#{id}
+    </select>
+    <select id="queryAllCourseByRoot" resultType="Course">
+        SELECT * FROM Course
     </select>
     <select id="queryAllIns" resultType="Institution">
         SELECT * FROM Institution

@@ -11,11 +11,24 @@
        http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
     <!-- 扫描web相关的bean -->
-    <context:component-scan base-package="com.zxc.controller"/>
+    <context:component-scan base-package="com.yasin.controller"/>
 
     <!-- 开启SpringMVC注解模式 -->
     <mvc:annotation-driven/>
 
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!-- 拦截所有mvc控制器 -->
+            <mvc:mapping path="/**"/>
+            <!-- mvc:exclude-mapping是另外一种拦截，它可以在你后来的测试中对某个页面进行不拦截，这样就不用在
+                LoginInterceptor的preHandler方法里面获取不拦截的请求uri地址了(优选) -->
+            <mvc:exclude-mapping path="/index/deal" />
+            <mvc:exclude-mapping path="/login" />
+            <mvc:exclude-mapping path="/check" />
+            <bean class="com.yasin.utils.LoginInterceptor"></bean>
+
+        </mvc:interceptor>
+    </mvc:interceptors>
     <!-- 静态资源默认servlet配置 -->
     <mvc:default-servlet-handler/>
 

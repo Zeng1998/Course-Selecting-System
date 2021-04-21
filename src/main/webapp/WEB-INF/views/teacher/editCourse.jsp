@@ -50,6 +50,7 @@
     <script>
         $(function () {
             $("#success").click(function () {
+                var classId = ${courseInfo.classId}
                 var name = $("#name").val();
                 var num = $("#num").val();
                 var ins = "";
@@ -63,7 +64,7 @@
                         ins = ins + "," + $(this).attr("value");
                     }
                 })
-                var content=name+"|"+num+"|"+ins;
+                var content=name+"|"+num+"|"+ins+"|"+classId;
                 var myform=document.createElement("form");
                 myform.id = "form1";
                 myform.name = "form1";
@@ -74,7 +75,7 @@
                 input.value = encodeURIComponent(encodeURIComponent(content));
                 myform.appendChild(input);
                 myform.method = "POST";
-                myform.action = "<%=basePath%>teacher/updateCourseSuccess?page"+1;
+                myform.action = "<%=basePath%>teacher/updateCourseSuccess?page="+1;
                 myform.submit();
                 document.body.removeChild(myform);
             })
